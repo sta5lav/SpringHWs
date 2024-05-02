@@ -2,6 +2,7 @@ package com.example.springhws.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,8 +16,8 @@ public class UpdateUserDto {
     @Size(min = 3, max = 10)
     private String name;
 
-    @Pattern(message = "${validatedValue}",
-            regexp = "^(.+)@(\\\\S+)$")
+    //@Pattern(regexp = "^(.+)@(\\\\S+)$")
+    @Email
     private String email;
 
 }

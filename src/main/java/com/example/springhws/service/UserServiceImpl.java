@@ -1,8 +1,8 @@
 package com.example.springhws.service;
 
 import com.example.springhws.dto.UpdateUserDto;
-import com.example.springhws.dto.UserDto;
 import com.example.springhws.mapper.UserMapper;
+import com.example.springhws.model.User;
 import com.example.springhws.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +15,17 @@ public class UserServiceImpl implements UserService{
 
     private UserMapper userMapper;
 
-    public List<UserDto> getAllUsers() {
-        return userMapper.listUserEntityToListUserDto(userRepository.findAll());
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public UserDto getUser(Long id) {
-        return userMapper.userEntityToUserDto(userRepository.findAllById(id));
+    public User getUser(Long id) {
+        return userRepository.findAllById(id);
     }
 
-    public UserDto createUser(UserDto userDto) {
-        userRepository.save(userMapper.userDtoToUserEntity(userDto));
-        return userDto;
+    public User createUser(User user) {
+        userRepository.save(user);
+        return user;
     }
 
     public boolean updateUser(UpdateUserDto updateUserDto) {

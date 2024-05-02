@@ -2,10 +2,9 @@ package com.example.springhws.controller;
 
 
 import com.example.springhws.dto.UpdateUserDto;
-import com.example.springhws.dto.UserDto;
 import com.example.springhws.dto.Views;
+import com.example.springhws.model.User;
 import com.example.springhws.service.UserService;
-import com.example.springhws.service.UserServiceImpl;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -46,7 +46,8 @@ public class UserController {
             tags = "Сервис для работы с клиентами"
     )
     @GetMapping(value = "/{id}")
-    public UserDto getUser(@PathVariable Long id) {
+    @JsonView(Views.UserDetails.class)
+    public User getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
@@ -66,9 +67,9 @@ public class UserController {
                     )},
             tags = "Сервис для работы с клиентами"
     )
-    @JsonView(Views.UserSummary.class)
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    @JsonView(Views.UserSummary.class)
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -92,8 +93,8 @@ public class UserController {
     )
     @JsonView(Views.UserSummary.class)
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.createUser(userDto));
+    public ResponseEntity<User> createUser(@RequestBody  @Valid @JsonView(Views.UserSummary.class) User user) {
+        return ResponseEntity.ok(userService.createUser(user));
 
     }
 
@@ -115,7 +116,7 @@ public class UserController {
             tags = "Сервис для работы с клиентами"
     )
     @PutMapping
-    public ResponseEntity<Void> updateUser(@RequestBody UpdateUserDto updateUserDto){
+    public ResponseEntity<Void> updateUser(@RequestBody @Valid UpdateUserDto updateUserDto){
         return ResponseEntity.status(
                 userService.updateUser(updateUserDto) ?
                         HttpStatus.OK :

@@ -1,6 +1,9 @@
 package com.example.springhws.model;
 
 import javax.persistence.*;
+
+import com.example.springhws.dto.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,6 +15,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.UserAllDetails.class)
     private Long id;
 
     private BigDecimal sum;

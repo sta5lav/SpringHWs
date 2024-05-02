@@ -1,18 +1,18 @@
 package com.example.springhws.service;
 
 import com.example.springhws.dto.UpdateUserDto;
-import com.example.springhws.dto.UserDto;
+import com.example.springhws.model.User;
 
 import java.util.List;
 
 public interface UserService {
 
 
-    UserDto getUser(Long id);
+    User getUser(Long id);
 
-    List<UserDto> getAllUsers();
+    List<User> getAllUsers();
 
-    UserDto createUser(UserDto userDto);
+    User createUser(User user);
 
     boolean updateUser(UpdateUserDto updateUserDto);
 

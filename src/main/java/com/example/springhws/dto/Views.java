@@ -2,7 +2,8 @@ package com.example.springhws.dto;
 
 public class Views {
 
-    public static class UserSummary  {}
-    public static class UserDetails  extends UserSummary{}
+    public static interface UserSummary  {}
+    public static interface UserDetails  extends UserSummary{}
+    public static interface UserAllDetails  extends UserDetails{}
 
 }
